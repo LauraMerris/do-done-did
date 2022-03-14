@@ -1,8 +1,8 @@
 import '../App.css';
 import ProgressList from '../components/ProgressList';
 import Card from '../components/Card';
-import Taglist from '../components/Taglist';
-import TagManager from '../components/TagManager';
+
+
 
 // dummy data
 const week = [

@@ -47,6 +47,7 @@
 
 .Skeleton__content{
   padding:2rem;
+
 }
 
 .Skeleton__content--narrow{
@@ -89,6 +90,7 @@ width: 0%;
 
 .Card-list__item{
   margin-top:1.5rem;
+  background:#fff;
 }
 
 .Card-list__item:first-of-type{
@@ -97,7 +99,7 @@ width: 0%;
 
 .Card{
   border-radius:8px;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 1px 3px 1px;
   padding:3rem;
 }
 
