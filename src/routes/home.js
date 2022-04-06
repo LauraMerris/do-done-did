@@ -1,8 +1,10 @@
 import '../App.css';
 import ProgressList from '../components/ProgressList';
 import Card from '../components/Card';
-
-
+import firebase from 'firebase/compat/app';
+import {useState, useEffect} from 'react';
+import UserContext from '../userContext';
+import { auth, signUserOut } from '../firebase';
 
 // dummy data
 const week = [
@@ -69,14 +71,43 @@ const week = [
 ];
 
 
+// getting an error at this point trying to read the uid
+const UserGreeting = (props) => {
+    const name = props.name;
+    return <span className="menu__greeting">{name}</span>;
+}
+
+const LoginPrompt = () => {
+    return <span>Please log in</span>
+}
+
+const LoginMessage = (props) => {
+
+    const cu = props.user.user;
+
+    if (cu == null) {
+        return <LoginPrompt />
+    }
+
+    console.log(cu);
+    return <UserGreeting name={cu.email} />;
+}
+
+
 const Home = () => {
     return (
         <div className="Skeleton">
             <header className="Skeleton-header">
                 <div className="menu">
+                    <UserContext.Consumer>
+                        {(user) => (
+                         <LoginMessage user={user} />   
+                        )}                    
+                    </UserContext.Consumer>
+                    <a className="menu__item">My week</a>
                     <a className="menu__item">Stats</a>
                     <a className="menu__item">Settings</a>
-                    <a className="menu__item">Account</a>
+                    <button className="menu__item" onClick={signUserOut}>Logout</button>
                 </div>
             </header>
             <div className="Skeleton__content Skeleton__content--narrow">
