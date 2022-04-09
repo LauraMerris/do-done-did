@@ -1,19 +1,25 @@
 import {useEffect, useState} from 'react';
-import {confirmSignIn, getUser } from "../firebase";
-import UserContext from '../userContext';
+import {confirmSignIn} from "../firebase";
+import { useNavigate } from 'react-router-dom';
 
 const Confirm = () => {
 
-    const [welcomeMessage, setWelcomeMessage] = useState('Checking your status');
+    const [message, setMessage] = useState('Checking your status...');
+    const navigate = useNavigate();
 
     useEffect(() => {
         // sign in the user if they landed here after email sign in
         confirmSignIn(window.location.href)
-            .then((result) => {
-                console.log('signed in');
-                setWelcomeMessage('signed in')
+            .then((isNewUser) => {             
+                if (!isNewUser){
+                    navigate("/home");
+                }
+                setMessage("You're signed in. Welcome - here are some onboarding instructions.")
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error);
+                setMessage("Sorry, something went wrong. Please try logging in again.")
+            })
     },[])
     
     return (
@@ -25,12 +31,7 @@ const Confirm = () => {
                     Do Done Did
                 </h1>
                 <div>
-                    <p>{welcomeMessage}</p>
-                    <UserContext.Consumer>
-                        {(user) => (
-                            <span>Hello {user.uid}</span>
-                        )}                    
-                    </UserContext.Consumer>
+                    <p>{message}</p>
                 </div>
             </div>
         </div>
