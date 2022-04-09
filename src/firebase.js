@@ -1,5 +1,7 @@
 import {initializeApp} from "firebase/app";
-import { getAuth, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, signOut } from "firebase/auth";
+import { getAuth, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, signOut, onAuthStateChanged, getAdditionalUserInfo } from "firebase/auth";
+import { createContext, useContext, useEffect,useState } from "react";
+import UserContext from "./userContext";
 
 
 // Your web app's Firebase configuration
@@ -19,21 +21,20 @@ const auth = getAuth(app);
 const actionCodeSettings = {
     url: 'http://localhost:3000/confirm',
     handleCodeInApp: true,
-  }
+}
 
 const signIn = async (email) => {
-if (email=='') return;
+    if (email==='') return;
 
-try{
-    await sendSignInLinkToEmail(auth, email, actionCodeSettings);
-    console.log("The link was successfully sent.");
-    window.localStorage.setItem('emailForSignIn', email);
-} catch(error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(errorMessage);
-    //throw error here
-}
+    try{
+        await sendSignInLinkToEmail(auth, email, actionCodeSettings);
+        console.log("The link was successfully sent.");
+        window.localStorage.setItem('emailForSignIn', email);
+    } catch(error) {
+        const errorMessage = error.message;
+        console.log(errorMessage);
+        //throw error here
+    }
 };
 
 const confirmSignIn = async (url) => {
@@ -48,32 +49,50 @@ const confirmSignIn = async (url) => {
             }
 
             const result = await signInWithEmailLink(auth, email, url);
+            const { isNewUser } = getAdditionalUserInfo(result);
             window.localStorage.removeItem('emailForSignIn');
+
+            return isNewUser;
         }
     } catch (err){
         console.log(err);
+        throw new Error(err);
     }
-   
-
-};
-
-const getUser = () => {
-    return auth.currentUser;
 };
 
 const signUserOut = () => {
     signOut(auth).then(() => {
-        // do something
-        console.log('sign out');
+        console.log('signed out');
     }).catch((error) => {
         console.log(error);
     });
 };
+
+const authContext = createContext();
+
+const AuthProvider = ({children}) => {
+    const [authedUser, setAuthedUser] = useState(false);
+    const [error, setError] = useState();
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, setAuthedUser, setError);
+        return unsubscribe;
+    
+    },[]);
+
+    return <authContext.Provider value={authedUser}>{children}</authContext.Provider>
+} 
+
+const useAuthState = () => {
+    return useContext(authContext);
+}
+
 
 export {
     auth,
     signIn,
     signUserOut,
     confirmSignIn,
-    getUser
+    AuthProvider,
+    useAuthState
 }

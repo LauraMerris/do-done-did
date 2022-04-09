@@ -3,24 +3,21 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Switch,
-  Link
 } from 'react-router-dom';
 import Intro from './routes/intro';
 import Home from './routes/home';
 import Login from './routes/login';
-import { useState, useEffect, createContext } from 'react';
-import { auth } from './firebase';
-import { onAuthStateChanged } from 'firebase/auth';
+import { AuthProvider } from './firebase';
 import Confirm from './routes/confirm';
-import UserContext from './userContext'
+import RequireAuth from './components/RequireAuth';
 
 
 function App() {
 
-  const [user, setUser] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+  //const [user, setUser] = useState();
+  //const [isLoading, setIsLoading] = useState(true);
 
+  /*
 useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (authenticatedUser) => {
       try{
@@ -35,26 +32,26 @@ useEffect(() => {
     return unsubscribe;
 
   },[]);
+  */
 // user logged in check here
-
+/*
   if (isLoading){
     return (
       <div>Currently Loading ...</div>
     )
   }
-
+*/
   return (
-    <UserContext.Provider value={{user}}>
+    <AuthProvider>
       <BrowserRouter>
       <Routes>
           <Route path="/" element ={<Intro />} />
-            <Route path="home" element={<Home />} />
           <Route path="login" element={<Login/>} />
           <Route path="confirm" element={<Confirm/>} />
-
+          <Route path="home" element={<RequireAuth><Home /></RequireAuth>} />
       </Routes>
     </BrowserRouter>
-  </UserContext.Provider>
+    </AuthProvider>
   );
 }
 

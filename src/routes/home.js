@@ -1,10 +1,7 @@
 import '../App.css';
 import ProgressList from '../components/ProgressList';
 import Card from '../components/Card';
-import firebase from 'firebase/compat/app';
-import {useState, useEffect} from 'react';
-import UserContext from '../userContext';
-import { auth, signUserOut } from '../firebase';
+import { signUserOut, useAuthState } from '../firebase';
 
 // dummy data
 const week = [
@@ -71,39 +68,20 @@ const week = [
 ];
 
 
-// getting an error at this point trying to read the uid
 const UserGreeting = (props) => {
-    const name = props.name;
-    return <span className="menu__greeting">{name}</span>;
+    const greeting = props.user?.email;
+    console.log(props.user);
+    return <span className="menu__greeting">{greeting}</span>;
 }
-
-const LoginPrompt = () => {
-    return <span>Please log in</span>
-}
-
-const LoginMessage = (props) => {
-
-    const cu = props.user.user;
-
-    if (cu == null) {
-        return <LoginPrompt />
-    }
-
-    console.log(cu);
-    return <UserGreeting name={cu.email} />;
-}
-
 
 const Home = () => {
+
+    const user = useAuthState();
     return (
         <div className="Skeleton">
             <header className="Skeleton-header">
                 <div className="menu">
-                    <UserContext.Consumer>
-                        {(user) => (
-                         <LoginMessage user={user} />   
-                        )}                    
-                    </UserContext.Consumer>
+                    <UserGreeting user={user} />   
                     <a className="menu__item">My week</a>
                     <a className="menu__item">Stats</a>
                     <a className="menu__item">Settings</a>
