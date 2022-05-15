@@ -1,0 +1,74 @@
+
+Projects
+    Project
+    -ProjectID
+    -Owner
+    -Contributors
+    -Items
+        Item
+        -Item
+        -Text
+        -Timestamp
+        -ProjectID?
+        -Author
+
+
+items: {
+    "[projectid]": {
+        "[itemid]": {
+            author: "userid" 
+            text: "my item text",
+            date: "timestamp",
+            project: "projectid",
+        },
+        "[itemid]": {
+            author: "userid" 
+            text: "my item text",
+            date: "timestamp",
+            project: "projectid",
+        },
+        "[itemid]": {
+            author: "userid" 
+            text: "my item text",
+            date: "timestamp",
+            project: "projectid",
+        }
+    },
+    "[projectid]": {
+        "[itemid]": {
+            author: "userid" 
+            text: "my item text",
+            date: "timestamp",
+            project: "projectid",
+        },
+        "[itemid]": {
+            author: "userid" 
+            text: "my item text",
+            date: "timestamp",
+            project: "projectid",
+        },
+        "[itemid]": {
+            author: "userid" 
+            text: "my item text",
+            date: "timestamp",
+            project: "projectid",
+        }
+    }
+}
+
+projects: {
+    "[projectid]":{
+        name:"",
+        owner:userID,
+        contributors:{userID:"contributor", userID2:"viewer"}
+        isPublic: bool
+    }
+}
+
+users: {
+    projects:{
+        project1:"owner",
+        projects2:"contributor",
+        projects3:"viewer",
+    }
+}
