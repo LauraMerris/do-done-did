@@ -3,6 +3,10 @@
 html,body{
   box-sizing:border-box;
 }
+input, textarea, button {
+  font-family:inherit;
+  font-size:inherit;
+}
 .App {
   text-align: center;
 }
@@ -163,11 +167,10 @@ html,body{
 
 .Skeleton__content{
   padding:2rem;
-
 }
 
 .Skeleton__content--narrow{
-  width:40em;
+  width:60em;
   max-width:80%;
   margin:0 auto;
 }
@@ -217,6 +220,7 @@ width: 0%;
   border-radius:8px;
   box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 1px 3px 1px;
   padding:3rem;
+  font-size:1.5rem;
 }
 
 .Card__input{
@@ -226,14 +230,14 @@ width: 0%;
 .Card__title{
   text-transform:uppercase;
   color:#666;
-  font-size:1em;
-  margin:0 0 1rem 0;
+  margin:0 0 2rem 0;
+  font-size:1.5rem;
 }
 
 .Taglist{
   list-style:none;
   display:flex;
-  margin:0;
+  margin:1rem 0 0 0;
   padding:0;
 } 
 
@@ -244,13 +248,13 @@ width: 0%;
 .Taglist__item{
   background:rgb(221, 233, 255);
   border-radius:99em;
-  padding:0 0.75rem;
-  font-size:0.75rem;
-  margin-right:0.5rem;
+  padding:0 1rem;
+  font-size:1.25rem;
+  margin-right:1rem;
 }
 
 .Taglist--right .Taglist__item{
-  margin-left:0.5rem;
+  margin-left:1rem;
   margin-right:0;
 }
 
@@ -278,8 +282,6 @@ width: 0%;
   border-radius:0;
   border-left:3px solid #bbbbbb;
   padding:1rem;
-  font-family:inherit;
-  font-size:1rem;
   resize:none;
 }
 
@@ -293,7 +295,6 @@ width: 0%;
   width:100%;
   border-radius:0;
   border-left:3px solid #bbbbbb;
-  font-size:1rem;
   padding:0.5rem 1rem;
   margin-top:0.5rem;
 }
@@ -324,7 +325,7 @@ width: 0%;
 
 .Add-progress__button{
   background:#ffffff;
-  padding:0.5rem;
+  padding:0.5rem 2rem;
   border:none;
   border-radius:5px;
   background:#aae945;
