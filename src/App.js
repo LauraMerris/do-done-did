@@ -7,6 +7,7 @@ import {
 import Intro from './routes/intro';
 import Home from './routes/home';
 import Login from './routes/login';
+import Test from './routes/databasetest';
 import { AuthProvider } from './firebase';
 import Confirm from './routes/confirm';
 import RequireAuth from './components/RequireAuth';
@@ -49,6 +50,7 @@ useEffect(() => {
           <Route path="login" element={<Login/>} />
           <Route path="confirm" element={<Confirm/>} />
           <Route path="home" element={<RequireAuth><Home /></RequireAuth>} />
+          <Route path="test" element={<Test/>} />
       </Routes>
     </BrowserRouter>
     </AuthProvider>
