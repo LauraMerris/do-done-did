@@ -2,9 +2,9 @@ import ProgressItem from "./ProgressItem";
 
 const ProgressList = (props) => {
 
-    const items = props.items.map((item) => (
-        <li key={item.id} className="Progress-list__item">
-            <ProgressItem text={item.text} tags={item.tags} />
+    const items = Object.entries(props.items).map(([key,value]) => (
+        <li key={key} className="Progress-list__item">
+            <ProgressItem text={value.update} tags={value?.tags} />
         </li>
     ));
 

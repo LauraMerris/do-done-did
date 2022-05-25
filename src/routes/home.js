@@ -1,7 +1,9 @@
 import '../App.css';
 import ProgressList from '../components/ProgressList';
 import Card from '../components/Card';
-import { signUserOut, useAuthState } from '../firebase';
+import { signUserOut, useAuthState, db } from '../firebase';
+import { ref, onValue } from "firebase/database";
+import { useState, useEffect } from "react";
 
 // dummy data
 const week = [
@@ -70,13 +72,23 @@ const week = [
 
 const UserGreeting = (props) => {
     const greeting = props.user?.email;
-    console.log(props.user);
     return <span className="menu__greeting">{greeting}</span>;
 }
 
 const Home = () => {
 
+    const [progress, setProgress] = useState([]);
+
+    useEffect(() => {
+        const updatesRef = ref(db, 'updates');
+        onValue(updatesRef, (snapshot) => {
+            let data = snapshot.val();
+            setProgress(data);
+        });
+    },[]);
+
     const user = useAuthState();
+
     return (
         <div className="Skeleton">
             <header className="Skeleton-header">
@@ -89,19 +101,17 @@ const Home = () => {
                 </div>
             </header>
             <div className="Skeleton__content Skeleton__content--narrow">
-                <h1 className="Skeleton__title Skeleton__title--centered">7 &#8211; 13 March</h1>
+                <h1 className="Skeleton__title Skeleton__title--centered">7 &#8211; 13 March</h1>        
                 <div className="Card-list">
-                    {week.map((item) => (
-                        <div key={item.day} className="Card-list__item">
-                            <Card key={item.day} title={item.day}>
-                                {(item.day === "today") ? 
-                                    <div className="Card__input Add-progress">
-                                        <textarea autoFocus aria-label="What's your progress?" className="Add-progress__input" rows="3" placeholder="What's your progress today?"></textarea>
-                                        <input placeholder="+ add tag" type="text" aria-label="tags" className="Add-progress__tags" />
-                                        <button className="Add-progress__button">Update</button>
-                                    </div>
-                                :""}
-                                <ProgressList items={item.entries} />
+                    <div className="Card__input Add-progress">
+                        <textarea autoFocus aria-label="What's your progress?" className="Add-progress__input" rows="3" placeholder="What's your progress today?"></textarea>
+                        <input placeholder="+ add tag" type="text" aria-label="tags" className="Add-progress__tags" />
+                        <button className="Add-progress__button">Update</button>
+                    </div>
+                    {Object.entries(progress).map(([key, value]) => (
+                        <div key={key} className="Card-list__item">
+                            <Card key={key} title={key}>
+                                <ProgressList items={value} />
                             </Card>
                         </div>
                     ))}
@@ -112,3 +122,4 @@ const Home = () => {
 }
 
 export default Home;
+

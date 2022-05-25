@@ -1,74 +1,113 @@
+// projects are per-user, so there may well be multiple users who have picked the same name for their projects.
+// this means a key must be User+Project, rather than Project alone.
 
-Projects
-    Project
-    -ProjectID
-    -Owner
-    -Contributors
-    -Items
-        Item
-        -Item
-        -Text
-        -Timestamp
-        -ProjectID?
-        -Author
+// UIDUserOne is working on ProjectOne, ProjectTwo and ProjectThree
+// UIDUserTwo is working on ProjectTwo
+
+// how to associate updates, wins and challenges with a time block?
+// e.g. see all updates this week and prompt wins and challenges at the end of the week
+// weekly and monthly, or custom dates?
+
+// what i need to retrieve:
+// see all updates for user X made this week, grouped by day
+
+// see all updates for user X tagged with project Y
+// see last updated date for user X for each project
+
+// see all wins and challenges for user X made this month / year
 
 
-items: {
-    "[projectid]": {
-        "[itemid]": {
-            author: "userid" 
-            text: "my item text",
-            date: "timestamp",
-            project: "projectid",
+{
+    "Users":{
+        "UIDUserOne":{
+            "Name":"Laura",
+            "Email":"laurasemail@foo.com",
+            "Avatar":"imgURL"
         },
-        "[itemid]": {
-            author: "userid" 
-            text: "my item text",
-            date: "timestamp",
-            project: "projectid",
-        },
-        "[itemid]": {
-            author: "userid" 
-            text: "my item text",
-            date: "timestamp",
-            project: "projectid",
+        "UIDUserTwo":{
+            "Name":"Bob",
+            "Email":"bob@bob.com",
+            "Avatar": "imgURL"
         }
     },
-    "[projectid]": {
-        "[itemid]": {
-            author: "userid" 
-            text: "my item text",
-            date: "timestamp",
-            project: "projectid",
+
+    "Updates": {
+        "UpdateOne": {
+            "User": "UIDUserOne",
+            "Text":"This is what I did first",
+            "Timestamp": YYYY-MM-DD-HH-MM,
+            "Projects": {
+                "ProjectOne":true,
+                "ProjectTwo":true
+            }
         },
-        "[itemid]": {
-            author: "userid" 
-            text: "my item text",
-            date: "timestamp",
-            project: "projectid",
+        "UpdateTwo": {
+            "User": "UIDTwo",
+            "Text":"This is some other work I did",
+            "Timestamp": YYYY-MM-DD-HH-MM,
+            "Projects": {
+                "ProjectTwo":true
+            }
         },
-        "[itemid]": {
-            author: "userid" 
-            text: "my item text",
-            date: "timestamp",
-            project: "projectid",
+        "UpdateThree":{
+            "User":"UIDOne",
+            "Text":"Getting on with it",
+            "Timestamp": YYYY-MM-DD-HH-MM,
+            "Projects": {
+                "ProjectThree":true
+            }
         }
-    }
-}
-
-projects: {
-    "[projectid]":{
-        name:"",
-        owner:userID,
-        contributors:{userID:"contributor", userID2:"viewer"}
-        isPublic: bool
-    }
-}
-
-users: {
-    projects:{
-        project1:"owner",
-        projects2:"contributor",
-        projects3:"viewer",
+    },
+    "Wins":{
+        "WinOne":{
+            "User":"UIDUserOne",
+            "Text":"Great week - I managed to finish stage two of the project",
+            "Timestamp": YYYY-MM-DD-HH-MM,
+            "Projects": {
+                "ProjectTwo": true
+            }
+        },
+        "WinTwo":{
+            "User":"UIDUserOne",
+            "Text":"Did some marketing in prep for launch next month",
+            "Timestamp":YYYY-MM-DD-HH-MM,
+            "Projects":{
+                "ProjectOne": true
+            }
+        },
+        "WinThree":{
+            "User":"UIDUserTwo",
+            "Text":"Reading for my app. Started learning Framework X. Cleaned the whole house.",
+            "Timestamp":YYYY-MM-DD-HH-MM,
+            "Projects":{
+                "ProjectTwo"
+            }
+        }
+    },
+    "Challenges":{
+        "WinOne":{
+            "User":"UIDUserOne",
+            "Text":"Couldn't find good documentation for Y",
+            "Timestamp": YYYY-MM-DD-HH-MM,
+            "Projects": {
+                "ProjectTwo": true
+            }
+        },
+        "WinTwo":{
+            "User":"UIDUserOne",
+            "Text":"Waiting on call back from printers - too slow.",
+            "Timestamp":YYYY-MM-DD-HH-MM,
+            "Projects":{
+                "ProjectOne": true
+            }
+        },
+        "WinThree":{
+            "User":"UIDUserTwo",
+            "Text":"Still confused about topic Z."
+            "Timestamp":YYYY-MM-DD-HH-MM,
+            "Projects":{
+                "ProjectTwo":true
+            }
+        }
     }
 }
