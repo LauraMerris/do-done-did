@@ -8,7 +8,7 @@ const Test = () => {
     const [progress, setProgress] = useState([]);
 
     useEffect(() => {
-        const updatesRef = ref(db, 'updates');
+        const updatesRef = ref(db, 'Updates');
         onValue(updatesRef, (snapshot) => {
             let data = snapshot.val();
             setProgress(data);

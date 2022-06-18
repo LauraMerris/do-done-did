@@ -20,7 +20,7 @@ const Confirm = () => {
                 console.log(error);
                 setMessage("Sorry, something went wrong. Please try logging in again.")
             })
-    },[])
+    },[]);
     
     return (
         <div className="Skeleton">

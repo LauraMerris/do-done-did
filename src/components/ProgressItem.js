@@ -1,8 +1,9 @@
 import Taglist from "./Taglist";
+import classes from "./ProgressItem.module.css";
 
 const ProgressItem = (props) => (
-        <div className="Progress-item">
-            <p className={`Progress-item__summary`}>{props.text}</p>
+        <div className={classes.progressItem}>
+            <p className={classes.progressItem__summary}>{props.text}</p>
             {props.tags !== undefined && <Taglist tags={props.tags} />}
         </div>
 );

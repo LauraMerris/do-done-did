@@ -1,0 +1,13 @@
+.progressList{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+  
+.progressList__item{
+    margin-top:3rem;
+}
+
+.progressList__item:first-of-type{
+    margin-top:0;
+}
