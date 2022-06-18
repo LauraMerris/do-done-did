@@ -1,0 +1,31 @@
+.menu{
+    display:flex;
+    justify-content: flex-end;
+    align-items:center;
+    height:4rem;
+    padding:0 1rem;
+  }
+  
+.menu__item{ 
+padding:0rem 1.25rem;
+font-weight:600;
+display: block;
+position: relative;
+line-height:2.4;
+text-decoration:none;
+}
+
+.menu__item:after {
+backface-visibility: hidden;
+border-bottom: 3px solid #282c34;
+content: " ";
+display: block;
+margin: 0 auto;
+position: relative;
+transition: all 280ms ease-in-out;
+width: 0%;
+}
+
+.menu__item:hover:after{
+width:100%;
+}

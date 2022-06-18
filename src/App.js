@@ -1,9 +1,5 @@
 import './App.css';
-import { 
-  BrowserRouter,
-  Routes,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Intro from './routes/intro';
 import Home from './routes/home';
 import Login from './routes/login';
@@ -11,6 +7,7 @@ import Test from './routes/databasetest';
 import { AuthProvider } from './firebase';
 import Confirm from './routes/confirm';
 import RequireAuth from './components/RequireAuth';
+import Layout from './layouts/Layout';
 
 
 function App() {
@@ -49,7 +46,7 @@ useEffect(() => {
           <Route path="/" element ={<Intro />} />
           <Route path="login" element={<Login/>} />
           <Route path="confirm" element={<Confirm/>} />
-          <Route path="home" element={<RequireAuth><Home /></RequireAuth>} />
+          <Route path="home" element={<RequireAuth><Layout><Home /></Layout></RequireAuth>} />
           <Route path="test" element={<Test/>} />
       </Routes>
     </BrowserRouter>

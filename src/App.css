@@ -175,65 +175,6 @@ input, textarea, button {
   margin:0 auto;
 }
 
-.menu{
-  display:flex;
-  justify-content: flex-end;
-  align-items:center;
-  height:4rem;
-  padding:0 1rem;
-}
-
-.menu__item{ 
-  padding:0rem 1.25rem;
-  font-weight:600;
-  display: block;
-  position: relative;
-  line-height:2.4;
-  text-decoration:none;
-}
-
-.menu__item:after {
-backface-visibility: hidden;
-border-bottom: 3px solid #282c34;
-content: " ";
-display: block;
-margin: 0 auto;
-position: relative;
-transition: all 280ms ease-in-out;
-width: 0%;
-}
-
-.menu__item:hover:after{
-  width:100%;
-}
-
-.Card-list__item{
-  margin-top:1.5rem;
-  background:#fff;
-}
-
-.Card-list__item:first-of-type{
-  margin-top:0;
-}
-
-.Card{
-  border-radius:8px;
-  box-shadow: rgb(60 64 67 / 30%) 0px 1px 2px 0px, rgb(60 64 67 / 15%) 0px 1px 3px 1px;
-  padding:3rem;
-  font-size:1.5rem;
-}
-
-.Card__input{
-  margin-bottom:2rem;
-}
-
-.Card__title{
-  text-transform:uppercase;
-  color:#666;
-  margin:0 0 2rem 0;
-  font-size:1.5rem;
-}
-
 .Taglist{
   list-style:none;
   display:flex;
@@ -258,23 +199,6 @@ width: 0%;
   margin-right:0;
 }
 
-.Progress-list{
-  margin:0;
-  padding:0;
-  list-style:none;
-}
-
-.Progress-list__item{
-  margin-top:3rem;
-}
-
-.Progress-list__item:first-of-type{
-  margin-top:0;
-}
-
-.Progress-item__summary{
-  margin:0.25rem 0;
-}
 
 .Add-progress__input{
   width:100%;
