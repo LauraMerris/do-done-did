@@ -1,0 +1,35 @@
+.addProgress__input{
+    width:100%;
+    border:none;
+    border-radius:0;
+    border-left:3px solid #bbbbbb;
+    padding:1rem;
+    resize:none;
+}
+
+.addProgress__input:focus{
+    outline-color:transparent;
+    border-color:#aae945;
+}
+
+.addProgress__tags{
+    border:none;
+    width:100%;
+    border-radius:0;
+    border-left:3px solid #bbbbbb;
+    padding:0.5rem 1rem;
+    margin-top:0.5rem;
+}
+
+.addProgress__tags:focus{
+    outline-color:transparent;
+    border-color:#aae945;
+}
+
+.addProgress__button{
+    background-color:#aae945;
+    border:none;
+    padding:0.5rem;
+    margin-top:1rem;
+}
+  
